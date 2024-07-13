@@ -52,12 +52,12 @@ const Form = () => {
             [name]: value,
         });
     }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await handleSalesApi(formData);
-            if (response) {
+            if (response.ok) {
+                alert('Order placed succesfully')
                 navigate('/')
             } else {
                 alert('Unsuccessful order - please try again')
@@ -74,30 +74,39 @@ const Form = () => {
     const handleBankDetails = () => {
         setToggleHidden(!hidden)
     }
+    const handleClick = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+
+        handleBankDetails()
+    }
 
     return (
         <>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4 md:p-10 p-4 md:text-sm text-[10px] '>
                 <div className='w-full h-auto flex gap-2'>
-                    <input type='text' className='w-[50%] p-2 h-[60px] bg-[#00000016] placeholder:text-[black] placeholder:tracking-[4px] pl-[15px]' placeholder='FIRST NAME' name='first_name' value={formData.first_name} onChange={handleChange} />
-                    <input type='text' className='w-[50%] h-[60px] bg-[#00000016] placeholder:text-[black] placeholder:tracking-[4px] pl-[15px]' placeholder='LAST NAME' name='last_name' value={formData.last_name} onChange={handleChange} />
+                    <input type='text' className='w-[50%] p-2 h-[60px] bg-[#00000016] placeholder:text-[black] placeholder:tracking-[4px] pl-[15px]' placeholder='FIRST NAME' name='first_name' value={formData.first_name} onChange={handleChange} required />
+                    <input type='text' className='w-[50%] h-[60px] bg-[#00000016] placeholder:text-[black] placeholder:tracking-[4px] pl-[15px]' placeholder='LAST NAME' name='last_name' value={formData.last_name} onChange={handleChange} required />
                 </div>
                 <div className='w-full h-auto flex gap-2'>
-                    <input type='text' className='input' placeholder='COUNTRY CODE' name='country_code' value={formData.country_code} onChange={handleChange} />
-                    <input type='text' className='input' placeholder='CURRENCY CODE' name='currency_code' value={formData.currency_code} onChange={handleChange} />
+                    <input type='text' className='input' placeholder='COUNTRY CODE' name='country_code' value={formData.country_code} onChange={handleChange} required />
+                    <input type='text' className='input' placeholder='CURRENCY CODE' name='currency_code' value={formData.currency_code} onChange={handleChange} required />
 
                 </div>
                 <input type='text' className='input' placeholder='HOUSE ADDRESS' onChange={handleChange} />
                 <input type='text' className='input' placeholder='TOWN / CITY' onChange={handleChange} />
                 <input type='text' className='input' placeholder='ZIPCODE / POSTCODE' />
-                <input type='text' className='input' placeholder='PHONE' name='phone' value={formData.phone} onChange={handleChange} />
-                <input type='email' className='input' placeholder='EMAIL' name='email' value={formData.email} onChange={handleChange} />
+                <input type='text' className='input' placeholder='PHONE' name='phone' value={formData.phone} onChange={handleChange} required />
+                <input type='email' className='input' placeholder='EMAIL' name='email' value={formData.email} onChange={handleChange} required />
 
                 <p className='mt-[50px] mb-[50px] text-center tracking-[2px] md:tracking-[4px] relative after:content-[""] after:w-[60%] md:after:w-[60%] lg:after:w-[43%] after:absolute after:h-[2px] after:bg-[#00000061]  after:bottom-0 md:after:right-[21%] after:right-[21%] lg:after:right-[29%]'>SHIP TO DIFFERENT ADDRESS?</p>
 
                 <div className='flex flex-col gap-2 justify-start items-start font-lato mb-[30px] border-t-2 border-b-2 pt-10 pb-10 w-[90%] mx-auto'>
                     <div className='flex gap-4 justify-center items-center'>
-                        <input type='radio' value={formData.mode_of_payment} for='mode_of_payment' name='mode_of_payment' onClick={handleBankDetails} />
+                        <input type='radio' value='bank transfer' id='bank transfer' name='mode_of_payment' onClick={handleClick} />
                         <h3 className={`${hidden ? 'flex cursor-not-allowed' : ''} tracking-[3px]`}>DIRECT BANK TRANSFER</h3>
                     </div>
                     <p className='text-[10px] md:text-sm w-[90%] mx-auto'>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have cleared in our account.</p>
@@ -107,7 +116,7 @@ const Form = () => {
                         <p>Account Name: Selah_Marv_Clothing Shop</p>
                     </div>
                     <div className='flex gap-4 justify-center items-center mt-[20px]'>
-                        <input type='radio' value={formData.mode_of_payment} for='mode_of_payment' name='mode_of_payment' onClick={handleBankDetails} />
+                        <input type='radio' value='cash' id='cash' name='mode_of_payment' onClick={handleClick} />
                         <h3 className='tracking-[3px]'>CASH ON DELIVERY</h3>
                     </div>
                 </div>

@@ -2,12 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '../components'
 import CardTabs from '../components/CardTab';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchProducts } from '../store/products';
 
 const RootLayout = () => {
-    const products = useSelector(store => store.product.products);
+    const dispatch = useDispatch();
+    const { products, status } = useSelector(store => store.product);
     const [val, setVal] = useState('');
-    const [filtered, setFiltered] = useState(products);
+    const [filtered, setFiltered] = useState([]);
+
+
+    useEffect(() => {
+        if (status === 'idle') {
+
+            dispatch(fetchProducts())
+        }
+        setFiltered(products)
+
+    }, [dispatch, status])
+
 
 
     useEffect(() => {

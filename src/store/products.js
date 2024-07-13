@@ -1,13 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { handleApi } from "../api/timbleApi";
+
+export const fetchProducts = createAsyncThunk(
+    'product/fetchProducts',
+    async () => {
+        const response = await handleApi();
+        return response;
+    }
+);
 
 
 const ProductSlice = createSlice({
     name: 'product',
     initialState: {
-        products: await handleApi(),
+        products: [],
         menuBar: false,
         searchBar: false,
+        status: 'idle',
 
     },
 
@@ -27,6 +36,20 @@ const ProductSlice = createSlice({
             }
         },
 
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchProducts.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchProducts.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.products = action.payload;
+            })
+            .addCase(fetchProducts.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            });
     }
 })
 

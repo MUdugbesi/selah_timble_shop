@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import Pagination from '../components/Pagination';
 
+
 const Home = () => {
     const products = useSelector(store => store.product.products);
     const [toggleOther, setToggleOther] = useState(false);

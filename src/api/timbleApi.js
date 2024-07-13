@@ -27,15 +27,18 @@ export const handleSalesApi = async (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                
             },
             body: JSON.stringify(props)
         });
 
-        console.log(response)
+        if (response.ok) {
+            return response
+        } else {
+            alert('error')
+        }
 
     } catch (e) {
-        console.log(e)
+        throw new Error('Error: ', e.message)
     }
 }
 

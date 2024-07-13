@@ -6,35 +6,27 @@ import { Link } from 'react-router-dom';
 
 
 const CardTabs = () => {
-    const [totalQty, setTotalQty] = useState(0);
-    const [totalSum, setTotalSum] = useState(0)
     const carts = useSelector(store => store.cart.items);
     const products = useSelector(store => store.product.products)
     const statusTab = useSelector(store => store.cart.statusTab);
     const dispatch = useDispatch();
+    const [totalQty, setTotalQty] = useState(0);
+    const [totalSum, setTotalSum] = useState(0)
+
 
     useEffect(() => {
-        let total = 0;
-        carts.forEach((item) => total += item.quantity)
-        setTotalQty(total)
-    }, [carts]);
+        const { totalQty, totalSum } = carts.reduce((acc, cart) => {
+            const product = products.find(prd => prd.id === cart.productId);
+            const price = product.current_price[0].USD[0] || 0;
+            acc.totalQty += cart.quantity;
+            acc.totalSum += price * cart.quantity;
+            return acc;
+        }, { totalQty: 0, totalSum: 0 });
 
-    useEffect(() => {
-        let sum = 0
-        const inCart = [];
-        carts.map((cart) => {
-            const { productId, quantity } = cart;
-            const pd = products.findIndex((prd) => prd.id === productId);
-            const price = products[pd].current_price[0].USD[0]
-            inCart.push(price * quantity)
-        });
-        for (let i = 0; i < inCart.length; i++) {
-            sum += inCart[i]
-        }
+        setTotalQty(totalQty);
+        setTotalSum(totalSum.toFixed(2));
+    }, [carts, products]);
 
-        setTotalSum(sum.toFixed(2))
-
-    }, [totalQty, carts])
 
 
     const handleCloseTab = () => {
