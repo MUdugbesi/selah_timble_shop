@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply p-0 m-0 box-border bg-primary
+  }
+}
+
+@layer components {
+  .hover {
+    @apply hover:cursor-pointer hover:text-gray-500
+  }
+
+  .slider {
+    @apply w-[80%] h-[2px] bg-text relative rounded-sm
+  }
+
+  .slider .thumb {
+    @apply w-[23px] h-[23px] bg-black rounded-full absolute top-[-10px]
+  }
+
+  .nav_after {
+    @apply relative before:absolute before:content-[""] before:w-[0] before:h-0 before:bottom-[-2px] hover:before:w-full hover:after:h-[1px] before:border-2 before:border-white hover:before:border-[#00000067] before:rounded-md before:transition-all before:ease-linear before:delay-75 before:duration-500
+  }
+
+  .input {
+    @apply w-full h-[60px] bg-[#00000016] placeholder:text-[black] placeholder:tracking-[4px] pl-[15px]
+  }
+
+  /* .active{
+    @apply font-[600]
+  } */
+}
