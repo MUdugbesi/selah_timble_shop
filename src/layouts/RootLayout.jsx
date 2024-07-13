@@ -71,7 +71,7 @@ const RootLayout = () => {
             <header>
                 <Header val={val} handleInputChange={handleInputVal} handleSearchFilter={handleSearchFilter} handleClearSearch={handleClearSearch} />
             </header>
-            <main className='mb-[200px] min-h-[50vh] h-auto'>
+            <main className='md-[50px] md:mb-[200px] min-h-[50vh] h-auto'>
                 <Outlet context={[filtered, setFiltered]} />
                 <CardTabs />
                 <ToastContainer />
