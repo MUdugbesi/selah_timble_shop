@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { BiLogoPlayStore } from "react-icons/bi";
 const Footer = () => {
   return (
-    <div className='w-full h-[165px] bg-white flex absolute bottom-0'>
+    <div className='w-full h-[140px] md:h-[165px] bg-white relative bottom-0 flex'>
       <div className='flex lg:w-[60%] w-[80%] justify-between mx-auto items-center'>
         <div className='flex lg:w-[20%] md:w-[40%] w-[50%] max-sm:flex-col justify-evenly items-center'>
           <h1 className='font-italiana text-[30px]'><Link to='/'>SELAH</Link></h1>

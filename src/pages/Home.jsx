@@ -59,22 +59,22 @@ const Home = () => {
 
             <div className='hidden md:flex lg:w-[30%] md:w-[50%] mt-14 mb-14 h-auto mx-auto justify-evenly hover:cursor-pointer font-ibm-plex-sans text-[#000000c3] font-[400] '>
                 <p onClick={handleAll} className={`hover:font-[600px] font-[900]`}>ALL</p>
-                <p onClick={() => handleFilterFunction('accessories')} className={`hover:font-[600]`}>ACCESSORIES</p>
-                <p onClick={() => handleFilterFunction('male')} className={`hover:font-[600]`}>MALE</p>
-                <p onClick={() => handleFilterFunction('female')} className={`hover:font-[600]`}>FEMALE</p>
-                <p onClick={() => handleFilterFunction('unisex')} className={`hover:font-[600]`}>UNISEX</p>
+                <p onClick={() => handleFilterFunction('accessories')} className={`hover:font-[600] active:text-[#4361d9]`}>ACCESSORIES</p>
+                <p onClick={() => handleFilterFunction('male')} className={`hover:font-[600] active:text-[#4361d9]`}>MALE</p>
+                <p onClick={() => handleFilterFunction('female')} className={`hover:font-[600] active:text-[#4361d9]`}>FEMALE</p>
+                <p onClick={() => handleFilterFunction('unisex')} className={`hover:font-[600] active:text-[#4361d9]`}>UNISEX</p>
 
             </div>
             <div className='w-[60%] flex flex-col md:hidden mt-14 mb-14 h-auto mx-auto justify-center items-center hover:cursor-pointer font-ibm-plex-sans font-[400] text-[#000000c3]'>
                 <div className='flex w-[100%] justify-evenly items-center pb-3'>
-                    <Link onClick={handleAll} className={`hover:font-[600] font-[900]`}>ALL</Link>
-                    <Link onClick={() => handleFilterFunction('male')} className={`hover:font-[600]`}>MALE</Link>
-                    <Link onClick={() => handleFilterFunction('female')} className={`hover:font-[600]`}>FEMALE</Link>
+                    <Link onClick={handleAll} className={`hover:font-[600] font-[900] active:text-[#4361d9]`}>ALL</Link>
+                    <Link onClick={() => handleFilterFunction('male')} className={`hover:font-[600] active:text-[#4361d9]`}>MALE</Link>
+                    <Link onClick={() => handleFilterFunction('female')} className={`hover:font-[600] active:text-[#4361d9]`}>FEMALE</Link>
                     {!toggleOther ? <MdKeyboardArrowDown width={20} className='hover' onClick={handleOthersDisplay} /> : <MdKeyboardArrowUp width={20} className='hover' onClick={handleOthersDisplay} />}
                 </div>
                 <div className={`${toggleOther ? 'flex w-[100%] justify-evenly items-center' : 'hidden'}`}>
-                    <Link onClick={() => handleFilterFunction('accessories')} className={`hover:font-[600]`}>ACCESSORIES</Link>
-                    <Link onClick={() => handleFilterFunction('unisex')} className={`hover:font-[600]`}>UNISEX</Link>
+                    <Link onClick={() => handleFilterFunction('accessories')} className={`hover:font-[600] active:text-[#4361d9]`}>ACCESSORIES</Link>
+                    <Link onClick={() => handleFilterFunction('unisex')} className={`hover:font-[600] active:text-[#4361d9]`}>UNISEX</Link>
                 </div>
             </div>
 
@@ -83,8 +83,8 @@ const Home = () => {
                 {filtered.length ? (
                     paginate(currentPage).map((product, key) => <ProductCard data={product} key={key} />)
                 ) :
-                    (<div className='flex flex-col border-2 justify-center items-center mx-auto w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
-                        <p className='text-[red]'>Oops!</p>
+                    (<div className='flex flex-col border-2 justify-center items-center mx-auto w-[70%] md:w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
+                        <p className='text-[red]'>Loading ...</p>
                         <p>No Products Available</p>
                         <p onClick={handleAll} className='cursor-pointer hover:opacity-80 hover:text-[#15153c] hover:font-bold'>Show all products </p>
                     </div>

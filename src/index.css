@@ -7,7 +7,7 @@
 
 @layer base {
   body {
-    @apply p-0 m-0 box-border bg-primary
+    @apply p-0 m-0 box-border bg-primary 
   }
 }
 

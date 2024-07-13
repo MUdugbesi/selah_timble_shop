@@ -76,7 +76,7 @@ const RootLayout = () => {
                 <CardTabs />
                 <ToastContainer />
             </main>
-            <footer className='relative h-[auto]'>
+            <footer className='relative h-auto'>
                 <Footer />
             </footer>
         </>
