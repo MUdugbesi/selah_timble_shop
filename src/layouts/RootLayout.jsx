@@ -19,7 +19,12 @@ const RootLayout = () => {
             dispatch(fetchProducts())
                 .catch(error => {
                     console.error('Error fetching products:', error.message);
-                    toast.error('Failed to fetch products. Please try again later.');
+                    toast.error('Failed to fetch products. Please try again later.', {
+                       
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeButton: true,
+                    });
                 });
         }
         setFiltered(products); // Initially set filtered products to all products
@@ -47,7 +52,6 @@ const RootLayout = () => {
         const search = []
         products.forEach((product) => {
             const { name } = product;
-            console.log(name.toLowerCase())
             if (name) {
                 if (name.toLowerCase().includes(`${val}`)) {
                     search.push(product)

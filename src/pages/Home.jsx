@@ -79,40 +79,21 @@ const Home = () => {
             </div>
 
 
-            {/* <div className={`${filtered.length ? `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 lg:gap-10 w-[90%] p-10 md:p-0 lg:w-[80%] md:w-[95%] mx-auto h-auto` : ''}`}>
-                {filtered.length ? filteredPerPage.map((product, key) => {
-                    return (
-                        <ProductCard data={product} key={key} />
-                    )
-                }) :
-                    <>
-                        s
-                        <div className='flex flex-col border-2 justify-center items-center mx-auto w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
-                            <p className='text-[red]'>Oops!</p>
-                            <p>No Products Available</p>
-                            <p onClick={handleAll} className='cursor-pointer hover:opacity-80 hover:text-[#15153c] hover:font-bold'>Show all products </p>
-                        </div>
-                    </>
-                }
-
-            </div> */}
-
             <div className={`${filtered.length ? 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 lg:gap-10 w-[90%] p-10 md:p-0 lg:w-[80%] md:w-[95%] mx-auto h-auto' : ''}`}>
                 {filtered.length ? (
                     paginate(currentPage).map((product, key) => <ProductCard data={product} key={key} />)
                 ) :
-                    //     <div className='flex flex-col border-2 justify-center items-center mx-auto w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
-                    //         <p className='text-[red]'>Oops!</p>
-                    //         <p>No Products Available</p>
-                    //         <p onClick={handleAll} className='cursor-pointer hover:opacity-80 hover:text-[#15153c] hover:font-bold'>Show all products </p>
-                    //     </div>
-                    // )}
-                    ''}
+                    (<div className='flex flex-col border-2 justify-center items-center mx-auto w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
+                        <p className='text-[red]'>Oops!</p>
+                        <p>No Products Available</p>
+                        <p onClick={handleAll} className='cursor-pointer hover:opacity-80 hover:text-[#15153c] hover:font-bold'>Show all products </p>
+                    </div>
+                    )}
+
             </div>
 
 
             <div className='relative h-full mt-[50px] pb-[50px]'>
-                {/* <Pagination totalCards={filtered.length} cardPerPage={cardPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} /> */}
                 <Pagination totalCards={filtered.length} cardPerPage={cardPerPage} currentPage={currentPage} onPageChange={handlePageChange} />
 
             </div>
