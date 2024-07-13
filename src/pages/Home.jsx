@@ -16,7 +16,7 @@ const Home = () => {
 
     const lastCardIndex = currentPage * cardPerPage;
     const firstCardIndex = lastCardIndex - cardPerPage;
-    const filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex);
+    // const filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex);
 
     const handleFilterFunction = (category) => {
         const filteredProducts = products.filter(product =>
