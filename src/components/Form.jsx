@@ -57,13 +57,14 @@ const Form = () => {
         try {
             const response = await handleSalesApi(formData);
             if (response.ok) {
-                alert('Order placed succesfully')
+                toast.success('Order placed successfully');
                 navigate('/')
             } else {
-                alert('Unsuccessful order - please try again')
+                toast.error('Unsuccessful order - please try again');
             }
         } catch (e) {
-            throw new Error('Error with order')
+            toast.error('Error with order - please try again later');
+            throw new Error('Error with order');
         }
 
 

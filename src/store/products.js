@@ -17,7 +17,7 @@ const ProductSlice = createSlice({
         menuBar: false,
         searchBar: false,
         status: 'idle',
-
+        error: null
     },
 
     reducers: {
