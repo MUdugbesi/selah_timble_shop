@@ -16,25 +16,35 @@ const Home = () => {
 
     const lastCardIndex = currentPage * cardPerPage;
     const firstCardIndex = lastCardIndex - cardPerPage;
-    let filteredPerPage;
-    if (filtered.length > 1) {
-        filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex)
-    }
+    const filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex);
 
     const handleFilterFunction = (category) => {
         const filteredProducts = products.filter(product =>
             product.categories.some(cat => cat.name === category)
         );
         setFiltered(filteredProducts);
+        setCurrentPage(1)
     };
 
 
     const handleAll = () => {
-        setFiltered(products)
-    }
+        setFiltered(products);
+        setCurrentPage(1); // Reset to first page when showing all products
+    };
+
     const handleOthersDisplay = () => {
         setToggleOther(!toggleOther)
     }
+
+    const paginate = (pageNumber) => {
+        const startIndex = (pageNumber - 1) * cardPerPage;
+        const endIndex = startIndex + cardPerPage;
+        return filtered.slice(startIndex, endIndex);
+    }
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     return (
         <div className={`w-full min-h-[50vh] h-auto ${!statusTab ? 'opacity-100' : 'opacity-50'}`}>
@@ -69,7 +79,7 @@ const Home = () => {
             </div>
 
 
-            <div className={`${filtered.length ? `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 lg:gap-10 w-[90%] p-10 md:p-0 lg:w-[80%] md:w-[95%] mx-auto h-auto` : ''}`}>
+            {/* <div className={`${filtered.length ? `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 lg:gap-10 w-[90%] p-10 md:p-0 lg:w-[80%] md:w-[95%] mx-auto h-auto` : ''}`}>
                 {filtered.length ? filteredPerPage.map((product, key) => {
                     return (
                         <ProductCard data={product} key={key} />
@@ -85,9 +95,26 @@ const Home = () => {
                     </>
                 }
 
+            </div> */}
+
+            <div className={`${filtered.length ? 'grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5 lg:gap-10 w-[90%] p-10 md:p-0 lg:w-[80%] md:w-[95%] mx-auto h-auto' : ''}`}>
+                {filtered.length ? (
+                    paginate(currentPage).map((product, key) => <ProductCard data={product} key={key} />)
+                ) :
+                    //     <div className='flex flex-col border-2 justify-center items-center mx-auto w-[30%] p-5 rounded-lg leading-10 font-lato shadow-md shadow-black'>
+                    //         <p className='text-[red]'>Oops!</p>
+                    //         <p>No Products Available</p>
+                    //         <p onClick={handleAll} className='cursor-pointer hover:opacity-80 hover:text-[#15153c] hover:font-bold'>Show all products </p>
+                    //     </div>
+                    // )}
+                    ''}
             </div>
+
+
             <div className='relative h-full mt-[50px] pb-[50px]'>
-                <Pagination totalCards={filtered.length} cardPerPage={cardPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+                {/* <Pagination totalCards={filtered.length} cardPerPage={cardPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage} /> */}
+                <Pagination totalCards={filtered.length} cardPerPage={cardPerPage} currentPage={currentPage} onPageChange={handlePageChange} />
+
             </div>
         </div>
 
