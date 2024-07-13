@@ -16,26 +16,19 @@ const Home = () => {
 
     const lastCardIndex = currentPage * cardPerPage;
     const firstCardIndex = lastCardIndex - cardPerPage;
-
-    const filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex)
-
-    const handleFilterFunction = (val) => {
-        const filtered = []
-        products.forEach((product) => {
-            let categories = [];
-            for (let i = 0; i < product.categories.length; i++) {
-                const { name } = product.categories[i];
-                categories.push(name)
-            }
-            console.log(categories)
-            if (categories) {
-                if (categories.includes(val)) {
-                    filtered.push(product)
-                }
-            }
-        })
-        setFiltered(filtered)
+    let filteredPerPage;
+    if (filtered.length) {
+        filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex)
     }
+
+    const handleFilterFunction = (category) => {
+        const filteredProducts = products.filter(product =>
+            product.categories.some(cat => cat.name === category)
+        );
+        setFiltered(filteredProducts);
+    };
+
+
     const handleAll = () => {
         setFiltered(products)
     }

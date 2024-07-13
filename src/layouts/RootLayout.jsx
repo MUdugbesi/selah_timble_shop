@@ -15,7 +15,6 @@ const RootLayout = () => {
 
     useEffect(() => {
         if (status === 'idle') {
-
             dispatch(fetchProducts())
         }
         setFiltered(products)
