@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleStatusBar, emptyCart } from '../store/cart';
 import CartTabItem from './CardTabItem';
 import { Link } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 const CardTabs = () => {
     const carts = useSelector(store => store.cart.items);
@@ -34,6 +34,7 @@ const CardTabs = () => {
     }
 
     const handleEmptyCart = () => {
+        toast.success('Cart Emptied')
         dispatch(emptyCart())
     }
 

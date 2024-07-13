@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { addTocart } from '../store/cart';
+import { toast } from 'react-toastify';
+
 
 
 const Card = (props) => {
@@ -11,6 +13,7 @@ const Card = (props) => {
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
+        toast.success(`${name} item added to cart`);
         dispatch(addTocart({
             productId: id,
             quantity: 1

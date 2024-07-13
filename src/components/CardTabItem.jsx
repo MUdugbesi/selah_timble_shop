@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeQuantity } from '../store/cart';
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from 'react-toastify';
 
 
 const CartTabItem = (props) => {
@@ -32,6 +33,7 @@ const CartTabItem = (props) => {
     }
 
     const handleDeteleItem = () => {
+        toast.error('Removed from cart')
         dispatch(changeQuantity({
             productId: productId,
             quantity: 0

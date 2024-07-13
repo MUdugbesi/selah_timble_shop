@@ -11,10 +11,10 @@ export const handleApi = async () => {
     try {
 
         toast.info('Fetching products...', {
-            // autoClose: 6000,
+            autoClose: 8000,
             pauseOnHover: true,
             draggable: true,
-            closeButton: false,
+            closeButton: true,
         });
 
         const response = await fetch(`https://timbu-get-all-products.reavdev.workers.dev/?organization_id=${timbleOrgId}&reverse_sort=false&Appid=${timbleAppId}&Apikey=${timbleApiKey}`);
@@ -22,10 +22,10 @@ export const handleApi = async () => {
         if (response.ok) {
             const data = await response.json();
             toast.success('Products fetched successfully!', {
-                // autoClose: 6000,
+                autoClose: false,
                 pauseOnHover: true,
                 draggable: true,
-                closeButton: false,
+                closeButton: true,
             });
             return data.items;
         } else {
@@ -34,10 +34,10 @@ export const handleApi = async () => {
     } catch (error) {
         console.error('Error fetching products:', error.message);
         toast.error(`Error fetching products: ${error.message}`, {
-            // autoClose: 6000,
+            autoClose: false,
             pauseOnHover: true,
             draggable: true,
-            closeButton: false,
+            closeButton: true,
         });
         throw error;
     } finally {
@@ -46,13 +46,17 @@ export const handleApi = async () => {
     }
 };
 
+
+
+
 export const handleSalesApi = async (props) => {
     try {
 
-        toast.info('Posting sales data...', { autoClose: false });
+        toast.info('Placing order data...', { autoClose: true });
 
         const response = await fetch(`https://api.timbu.cloud/sales?organization_id=${timbleOrgId}&Appid=${timbleAppId}&Apikey=${timbleApiKey}`, {
             method: 'POST',
+            mode: "no-cors",
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -60,32 +64,32 @@ export const handleSalesApi = async (props) => {
         });
 
         if (response.ok) {
-            toast.success('Sales data posted successfully!', {
-                // autoClose: false,
+            toast.success('Order placed successfully!', {
+                autoClose: false,
                 pauseOnHover: true,
                 draggable: true,
-                closeButton: false,
+                closeButton: true,
             });
             return response.json();
         } else {
             throw new Error('Sales API request failed');
         }
     } catch (error) {
-        console.error('Error posting sales data:', error.message);
-        toast.error(`Error posting sales data: ${error.message}`, {
-            // autoClose: false,
+        console.error('Error placing order:', error.message);
+        toast.error(`Error placing order: ${error.message}`, {
+            autoClose: false,
             pauseOnHover: true,
             draggable: true,
-            closeButton: false,
+            closeButton: true,
         });
         throw error;
     } finally {
         // Hide loading toast when done
         toast.dismiss({
-            // autoClose: false,
+            autoClose: false,
             pauseOnHover: true,
             draggable: true,
-            closeButton: false,
+            closeButton: true,
         });
     }
 };
