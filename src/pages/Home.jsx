@@ -17,7 +17,7 @@ const Home = () => {
     const lastCardIndex = currentPage * cardPerPage;
     const firstCardIndex = lastCardIndex - cardPerPage;
     let filteredPerPage;
-    if (filtered.length) {
+    if (filtered.length > 1) {
         filteredPerPage = filtered.slice(firstCardIndex, lastCardIndex)
     }
 
