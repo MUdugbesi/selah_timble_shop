@@ -17,7 +17,7 @@ export const handleApi = async () => {
             closeButton: true,
         });
 
-        const response = await fetch(`https://timbu-get-all-products.reavdev.workers.dev/?organization_id=${timbleOrgId}&reverse_sort=false&Appid=${timbleAppId}&Apikey=${timbleApiKey}`);
+        const response = await fetch(`/api/products?organization_id=${timbleOrgId}&reverse_sort=false&Appid=${timbleAppId}&Apikey=${timbleApiKey}`);
 
         if (response.ok) {
             const data = await response.json();

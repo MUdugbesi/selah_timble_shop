@@ -20,13 +20,14 @@ const RootLayout = () => {
                 .catch(error => {
                     console.error('Error fetching products:', error.message);
                     toast.error('Failed to fetch products. Please try again later.', {
-                       
+
                         pauseOnHover: true,
                         draggable: true,
                         closeButton: true,
                     });
                 });
         }
+        console.log(products)
         setFiltered(products); // Initially set filtered products to all products
     }, [dispatch, status, products]);
 

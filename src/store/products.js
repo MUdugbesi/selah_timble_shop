@@ -3,14 +3,17 @@ import { handleApi } from "../api/timbleApi";
 
 export const fetchProducts = createAsyncThunk(
     'product/fetchProducts',
-    async () => {
-        const response = await handleApi();
-        return response;
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await handleApi();
+            return response;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
     }
 );
 
-
-const ProductSlice = createSlice({
+const productSlice = createSlice({
     name: 'product',
     initialState: {
         products: [],
@@ -19,23 +22,13 @@ const ProductSlice = createSlice({
         status: 'idle',
         error: null
     },
-
     reducers: {
         toggleMenuBar(state) {
-            if (state.menuBar === false) {
-                state.menuBar = true;
-            } else {
-                state.menuBar = false
-            }
+            state.menuBar = !state.menuBar;
         },
         toggleSearchBar(state) {
-            if (state.searchBar === false) {
-                state.searchBar = true;
-            } else {
-                state.searchBar = false
-            }
+            state.searchBar = !state.searchBar;
         },
-
     },
     extraReducers: (builder) => {
         builder
@@ -48,10 +41,10 @@ const ProductSlice = createSlice({
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message;
+                state.error = action.payload || action.error.message;
             });
     }
-})
+});
 
-export const { toggleMenuBar, toggleSearchBar } = ProductSlice.actions;
-export default ProductSlice.reducer;
+export const { toggleMenuBar, toggleSearchBar } = productSlice.actions;
+export default productSlice.reducer;
